@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the SimpleMCP Waitlist</title>
+    <meta name="description" content="Be the first to know when SimpleMCP launches. Join our waitlist to get early access to the easiest MCP server management tool.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="app-icon.png">
+    <link rel="apple-touch-icon" href="app-icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fefbea',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        blue: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Montserrat', 'sans-serif'],
+                        'body': ['Nunito Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        .btn {
+            @apply outline-none focus-visible:ring-2 ring-primary-500 inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-b from-blue-600/50 to-blue-400/50 duration-300 bg-size-200 bg-pos-0 drop-shadow-xl hover:bg-pos-100 backdrop-blur-sm font-display uppercase font-bold text-lg tracking-wider no-underline select-none whitespace-nowrap transition-all cursor-pointer;
+        }
+        .btn-primary {
+            @apply bg-gradient-to-b from-primary-500 to-primary-600 text-white hover:from-primary-400 hover:to-primary-500;
+        }
+        
+        .stars-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="1" fill="white" opacity="0.8"/><circle cx="300" cy="200" r="0.5" fill="white" opacity="0.6"/><circle cx="500" cy="50" r="1.5" fill="white" opacity="0.9"/><circle cx="800" cy="300" r="0.8" fill="white" opacity="0.7"/><circle cx="200" cy="600" r="1.2" fill="white" opacity="0.8"/><circle cx="900" cy="700" r="0.6" fill="white" opacity="0.5"/><circle cx="600" cy="800" r="1" fill="white" opacity="0.8"/><circle cx="50" cy="900" r="0.7" fill="white" opacity="0.6"/><circle cx="750" cy="150" r="1.3" fill="white" opacity="0.9"/><circle cx="400" cy="450" r="0.9" fill="white" opacity="0.7"/></svg>');
+            animation: stars-twinkle 20s linear infinite;
+        }
+        
+        @keyframes stars-twinkle {
+            0%, 100% { background-position: 0 0; }
+            50% { background-position: 100px 100px; }
+        }
+        
+        .glass {
+            @apply backdrop-blur-sm bg-white/10 border border-white/20;
+        }
+        
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .form-input {
+            @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+        }
+        
+        .form-textarea {
+            @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none;
+        }
+        
+        .form-select {
+            @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+        }
+        
+        .form-select option {
+            @apply bg-gray-800 text-white;
+        }
+    </style>
+</head>
+
+<body class="font-body text-gray-900 leading-relaxed">
+    <div class="min-h-screen stars-bg relative overflow-hidden">
+        <!-- Background overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/50 to-slate-900/80"></div>
+        
+        <!-- Navigation -->
+        <nav class="relative z-10 container mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-3">
+                    <img src="menu-icon.svg" alt="SimpleMCP" class="w-10 h-10 brightness-0 invert">
+                    <span class="font-display font-bold text-2xl text-white">SimpleMCP</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="/#features" class="text-white/80 hover:text-white transition-colors">Features</a>
+                    <a href="/#pricing" class="text-white/80 hover:text-white transition-colors">Pricing</a>
+                    <a href="/#faq" class="text-white/80 hover:text-white transition-colors">FAQ</a>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Waitlist Form -->
+        <div class="relative z-10 container mx-auto px-6 py-16">
+            <div class="max-w-2xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <h1 class="font-display font-bold text-4xl md:text-6xl text-white mb-6 text-shadow">
+                        Join the SimpleMCP Waitlist
+                    </h1>
+                    <p class="text-xl text-white/90 mb-8 text-shadow">
+                        Be the first to know when SimpleMCP launches. Get early access to the easiest way to manage MCP servers.
+                    </p>
+                    <div class="flex items-center justify-center space-x-6 text-white/80 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span>Early access</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span>Launch updates</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span>Free forever</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form -->
+                <div class="glass rounded-2xl p-8">
+                    <form name="waitlist" method="POST" netlify-honeypot="bot-field" data-netlify="true" action="/thank-you.html">
+                        <!-- Hidden honeypot field -->
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+                        
+                        <!-- Email -->
+                        <div class="mb-6">
+                            <label for="email" class="block text-white font-semibold mb-2">
+                                Email Address *
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required 
+                                class="form-input"
+                                placeholder="your@email.com"
+                            >
+                        </div>
+                        
+                        <!-- Name -->
+                        <div class="mb-6">
+                            <label for="name" class="block text-white font-semibold mb-2">
+                                Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input"
+                                placeholder="Your name"
+                            >
+                        </div>
+                        
+                        <!-- How did you hear about us -->
+                        <div class="mb-6">
+                            <label for="source" class="block text-white font-semibold mb-2">
+                                How did you hear about SimpleMCP? *
+                            </label>
+                            <select id="source" name="source" required class="form-select">
+                                <option value="">Select an option...</option>
+                                <option value="github">GitHub</option>
+                                <option value="twitter">Twitter/X</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="reddit">Reddit</option>
+                                <option value="discord">Discord</option>
+                                <option value="youtube">YouTube</option>
+                                <option value="blog">Blog/Article</option>
+                                <option value="friend">Friend/Colleague</option>
+                                <option value="search">Search Engine</option>
+                                <option value="claude">Claude/AI Assistant</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <!-- What do you want to use it for -->
+                        <div class="mb-6">
+                            <label for="use_case" class="block text-white font-semibold mb-2">
+                                What do you want to use SimpleMCP for? *
+                            </label>
+                            <textarea 
+                                id="use_case" 
+                                name="use_case" 
+                                required 
+                                rows="4" 
+                                class="form-textarea"
+                                placeholder="e.g., Managing Airtable MCP servers, integrating GitHub with Claude, automating Slack workflows, connecting custom APIs..."
+                            ></textarea>
+                            <p class="text-white/60 text-sm mt-2">
+                                Tell us about specific MCP tools, use cases, or integrations you're interested in.
+                            </p>
+                        </div>
+                        
+                        <!-- Anything else -->
+                        <div class="mb-8">
+                            <label for="additional" class="block text-white font-semibold mb-2">
+                                Anything else you'd like us to know?
+                            </label>
+                            <textarea 
+                                id="additional" 
+                                name="additional" 
+                                rows="3" 
+                                class="form-textarea"
+                                placeholder="Feature requests, questions, feedback..."
+                            ></textarea>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary w-full text-xl py-4">
+                            <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                            Join Waitlist
+                        </button>
+                        
+                        <p class="text-white/60 text-sm text-center mt-4">
+                            We'll only email you about SimpleMCP updates. No spam, ever.
+                        </p>
+                    </form>
+                </div>
+                
+                <!-- Back to home -->
+                <div class="text-center mt-8">
+                    <a href="/" class="text-white/80 hover:text-white transition-colors">
+                        ← Back to homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
