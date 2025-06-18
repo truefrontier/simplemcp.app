@@ -16,6 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <!-- Alpine.js with Collapse Plugin -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -49,12 +53,12 @@
         <div class="relative relative container mx-auto px-6 pt-20 pb-32">
             <div class="max-w-4xl mx-auto text-center">
                 <!-- Hero Headline (5-8 words) -->
-                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl text-white mb-8 text-shadow">
+                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl text-white mb-8 text-shadow" data-aos="fade-up">
                     Setup MCP Servers Instantly
                 </h1>
                 
                 <!-- Hero Subheading (Single sentence with all 6 core elements) -->
-                <p class="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto text-shadow">
+                <p class="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto text-shadow" data-aos="fade-up" data-aos-delay="200">
                     <!-- 🟡 Target Customer --> <strong>Developers and AI power users</strong> 
                     <!-- 🔴 Problem --> struggling with complex MCP server configuration and credential management 
                     <!-- 🟣 Product Category --> can use this desktop application 
@@ -64,7 +68,7 @@
                 </p>
                 
                 <!-- Hero CTA -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16" data-aos="fade-up" data-aos-delay="400">
                     <a href="waitlist.html" class="btn btn-primary text-lg px-12 py-5">
                         Download Free
                     </a>
@@ -74,7 +78,7 @@
                 </div>
                 
                 <!-- Hero Image/Screenshot -->
-                <div class="glass rounded-2xl p-8 mx-auto max-w-4xl">
+                <div class="glass rounded-2xl p-8 mx-auto max-w-4xl" data-aos="fade-up" data-aos-delay="600">
                     <div class="bg-gray-800 rounded-lg p-6 text-left">
                         <div class="flex items-center space-x-2 mb-4">
                             <div class="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -102,31 +106,31 @@
             <div class="max-w-4xl mx-auto">
                 <!-- Problem Statement -->
                 <div class="text-center mb-16">
-                    <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-8">
+                    <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-8" data-aos="fade-up">
                         MCP Setup Is A Nightmare
                     </h2>
-                    <p class="text-xl text-white/80 leading-relaxed">
+                    <p class="text-xl text-white/80 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
                         Setting up Model Context Protocol servers manually is frustrating, time-consuming, and error-prone.
                     </p>
                 </div>
                 
                 <!-- Agitation Points -->
                 <div class="grid md:grid-cols-3 gap-8 mb-16">
-                    <div class="text-center">
+                    <div class="text-center" data-aos="fade-left" data-aos-delay="100">
                         <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i data-lucide="clock" class="w-8 h-8 text-red-600"></i>
                         </div>
                         <h3 class="font-display font-semibold text-xl mb-3 text-white">Hours of Manual Config</h3>
                         <p class="text-white/70">Installing Node.js, configuring JSON files, managing credentials across multiple MCP servers.</p>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i data-lucide="alert-triangle" class="w-8 h-8 text-red-600"></i>
                         </div>
                         <h3 class="font-display font-semibold text-xl mb-3 text-white">Cryptic Error Messages</h3>
                         <p class="text-white/70">Debugging connection failures, authentication issues, and version conflicts without clear guidance.</p>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" data-aos="fade-right" data-aos-delay="300">
                         <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i data-lucide="trending-down" class="w-8 h-8 text-red-600"></i>
                         </div>
@@ -136,7 +140,7 @@
                 </div>
                 
                 <!-- Solution Introduction -->
-                <div class="glass rounded-2xl p-8 text-center">
+                <div class="glass rounded-2xl p-8 text-center" data-aos="fade-up" data-aos-delay="400">
                     <h3 class="font-display font-bold text-3xl text-white mb-4">
                         SimpleMCP Eliminates The Pain
                     </h3>
@@ -153,17 +157,17 @@
     <section id="onboarding" class="py-20 bg-gray-900/80 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6" data-aos="fade-up">
                     Get Started In 3 Simple Steps
                 </h2>
-                <p class="text-xl text-white/80">
+                <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="200">
                     From signup to fully configured MCP servers in under 5 minutes.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Step 1 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-right" data-aos-delay="100">
                     <div class="w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span class="text-3xl font-bold text-white">1</span>
                     </div>
@@ -178,7 +182,7 @@
                 </div>
                 
                 <!-- Step 2 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span class="text-3xl font-bold text-white">2</span>
                     </div>
@@ -194,7 +198,7 @@
                 </div>
                 
                 <!-- Step 3 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-left" data-aos-delay="300">
                     <div class="w-20 h-20 bg-accent-500 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span class="text-3xl font-bold text-white">3</span>
                     </div>
@@ -216,15 +220,15 @@
     <section class="py-20 bg-gray-900/80 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6" data-aos="fade-up">
                     Why Developers Choose SimpleMCP
                 </h2>
-                <p class="text-xl text-white/80">
+                <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="200">
                     Measurable results that save time and eliminate frustration.
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="300">
                 <div class="text-center">
                     <div class="text-4xl font-bold text-primary-500 mb-2">5min</div>
                     <div class="font-display font-semibold text-lg mb-2 text-white">Setup Time</div>
@@ -248,21 +252,21 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-8 mt-16">
-                <div class="glass rounded-lg p-6">
+                <div class="glass rounded-lg p-6" data-aos="fade-left" data-aos-delay="400">
                     <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
                         <i data-lucide="zap" class="w-6 h-6 text-primary-600"></i>
                     </div>
                     <h3 class="font-display font-semibold text-xl mb-3 text-white">Lightning Fast Setup</h3>
                     <p class="text-white/70">Get from zero to fully configured MCP environment in under 5 minutes with automated dependency management.</p>
                 </div>
-                <div class="glass rounded-lg p-6">
+                <div class="glass rounded-lg p-6" data-aos="fade-up" data-aos-delay="500">
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                         <i data-lucide="shield" class="w-6 h-6 text-blue-600"></i>
                     </div>
                     <h3 class="font-display font-semibold text-xl mb-3 text-white">Secure By Design</h3>
                     <p class="text-white/70">Encrypted credential storage with automatic synchronization across all your MCP tools and AI assistants.</p>
                 </div>
-                <div class="glass rounded-lg p-6">
+                <div class="glass rounded-lg p-6" data-aos="fade-right" data-aos-delay="600">
                     <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
                         <i data-lucide="rocket" class="w-6 h-6 text-accent-600"></i>
                     </div>
@@ -277,16 +281,16 @@
     <section class="py-20 bg-gray-900/80 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6" data-aos="fade-up">
                     Trusted By AI Developers
                 </h2>
-                <p class="text-xl text-white/80">
+                <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="200">
                     Join hundreds of developers who've eliminated MCP setup headaches.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-800/60 rounded-lg p-6 shadow-sm">
+                <div class="bg-gray-800/60 rounded-lg p-6 shadow-sm" data-aos="fade-left" data-aos-delay="100">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mr-4">
                             <span class="font-bold text-white">DJ</span>
@@ -298,7 +302,7 @@
                     </div>
                     <p class="text-white/80 italic">"Saved me 3 hours of setup time on my first project. The credential sync alone is worth it."</p>
                 </div>
-                <div class="bg-gray-800/60 rounded-lg p-6 shadow-sm">
+                <div class="bg-gray-800/60 rounded-lg p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mr-4">
                             <span class="font-bold">SM</span>
@@ -310,7 +314,7 @@
                     </div>
                     <p class="text-white/80 italic">"Finally, MCP setup that just works. No more debugging config files at midnight."</p>
                 </div>
-                <div class="bg-gray-800/60 rounded-lg p-6 shadow-sm">
+                <div class="bg-gray-800/60 rounded-lg p-6 shadow-sm" data-aos="fade-right" data-aos-delay="300">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mr-4">
                             <span class="font-bold">RC</span>
@@ -330,16 +334,16 @@
     <section id="features" class="py-20 bg-gray-900/80 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6" data-aos="fade-up">
                     Complete MCP Management Platform
                 </h2>
-                <p class="text-xl text-white/80">
+                <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="200">
                     Everything you need to manage MCP servers efficiently.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-                <div>
+                <div data-aos="fade-right">
                     <h3 class="font-display font-bold text-3xl mb-6 text-white">Multi-Transport Support</h3>
                     <ul class="space-y-4 text-lg">
                         <li class="flex items-start">
@@ -356,7 +360,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-gray-800 rounded-lg p-6 text-left">
+                <div class="bg-gray-800 rounded-lg p-6 text-left" data-aos="fade-left" data-aos-delay="200">
                     <div class="text-green-400 font-mono text-sm space-y-2">
                         <div><i data-lucide="radio" class="w-4 h-4 inline mr-2"></i>SSE: Innalysis IRR Calculator</div>
                         <div><i data-lucide="monitor" class="w-4 h-4 inline mr-2"></i>Stdio: Airtable MCP Server</div>
@@ -368,7 +372,7 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-                <div class="bg-gray-800 rounded-lg p-6 text-left order-2 md:order-1">
+                <div class="bg-gray-800 rounded-lg p-6 text-left order-2 md:order-1" data-aos="fade-right" data-aos-delay="200">
                     <div class="text-blue-400 font-mono text-sm space-y-2">
                         <div><i data-lucide="lock" class="w-4 h-4 inline mr-2"></i>Encrypted credential storage</div>
                         <div><i data-lucide="refresh-cw" class="w-4 h-4 inline mr-2"></i>Auto-sync across AI assistants</div>
@@ -377,7 +381,7 @@
                         <div><i data-lucide="search" class="w-4 h-4 inline mr-2"></i>Real-time status monitoring</div>
                     </div>
                 </div>
-                <div class="order-1 md:order-2">
+                <div class="order-1 md:order-2" data-aos="fade-left">
                     <h3 class="font-display font-bold text-3xl mb-6 text-white">Advanced Credential Management</h3>
                     <ul class="space-y-4 text-lg">
                         <li class="flex items-start">
@@ -397,7 +401,7 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
+                <div data-aos="fade-right">
                     <h3 class="font-display font-bold text-3xl mb-6 text-white">Cross-Platform Desktop App</h3>
                     <ul class="space-y-4 text-lg">
                         <li class="flex items-start">
@@ -414,7 +418,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="flex justify-center space-x-8">
+                <div class="flex justify-center space-x-8" data-aos="fade-left" data-aos-delay="200">
                     <div class="text-center">
                         <div class="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center mb-2">
                             <i data-lucide="apple" class="text-2xl text-white"></i>
@@ -442,10 +446,10 @@
     <section class="py-20 bg-red-900/20 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-8">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-8" data-aos="fade-up">
                     The Cost Of Manual MCP Setup
                 </h2>
-                <p class="text-xl text-white/80 mb-12">
+                <p class="text-xl text-white/80 mb-12" data-aos="fade-up" data-aos-delay="200">
                     Every day you delay, you're losing valuable development time and team productivity.
                 </p>
                 
@@ -699,5 +703,14 @@
     <!-- Background layers -->
     <div class="z-0 fixed inset-0 bg-gradient-to-b from-black/50 via-slate-900/70 to-slate-800/50"></div>
     <div class="motion-safe:animate-stars z-0 fixed inset-0 opacity-80" style="background: url('/visuals/bg-stars.png') 0 0/1000px 1000px repeat"></div>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>
