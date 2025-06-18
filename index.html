@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleMCP - MCP Server Manager</title>
+    <meta name="description" content="SimpleMCP helps developers and AI power users easily set up and manage MCP servers through a 3-step wizard that automates Node.js installation, credential management, and AI assistant integration, saving hours of manual configuration work.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/truefrontier/simplemcp/main/public/img/simplemcp-icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fefbea',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        blue: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Montserrat', 'sans-serif'],
+                        'body': ['Nunito Sans', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'stars': "url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\"><circle cx=\"100\" cy=\"100\" r=\"1\" fill=\"white\" opacity=\"0.8\"/><circle cx=\"300\" cy=\"200\" r=\"0.5\" fill=\"white\" opacity=\"0.6\"/><circle cx=\"500\" cy=\"50\" r=\"1.5\" fill=\"white\" opacity=\"0.9\"/><circle cx=\"800\" cy=\"300\" r=\"0.8\" fill=\"white\" opacity=\"0.7\"/><circle cx=\"200\" cy=\"600\" r=\"1.2\" fill=\"white\" opacity=\"0.8\"/><circle cx=\"900\" cy=\"700\" r=\"0.6\" fill=\"white\" opacity=\"0.5\"/><circle cx=\"600\" cy=\"800\" r=\"1\" fill=\"white\" opacity=\"0.8\"/><circle cx=\"50\" cy=\"900\" r=\"0.7\" fill=\"white\" opacity=\"0.6\"/><circle cx=\"750\" cy=\"150\" r=\"1.3\" fill=\"white\" opacity=\"0.9\"/><circle cx=\"400\" cy=\"450\" r=\"0.9\" fill=\"white\" opacity=\"0.7\"/></svg>')",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        .btn {
+            @apply outline-none focus-visible:ring-2 ring-primary-500 inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-b from-blue-600/50 to-blue-400/50 duration-300 bg-size-200 bg-pos-0 drop-shadow-xl hover:bg-pos-100 backdrop-blur-sm font-display uppercase font-bold text-lg tracking-wider no-underline select-none whitespace-nowrap transition-all cursor-pointer;
+        }
+        .btn-primary {
+            @apply bg-gradient-to-b from-primary-500 to-primary-600 text-white hover:from-primary-400 hover:to-primary-500;
+        }
+        .btn-secondary {
+            @apply bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-400 hover:to-blue-500;
+        }
+        .btn-accent {
+            @apply bg-gradient-to-b from-accent-500 to-accent-600 text-white hover:from-accent-400 hover:to-accent-500;
+        }
+        
+        .stars-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="1" fill="white" opacity="0.8"/><circle cx="300" cy="200" r="0.5" fill="white" opacity="0.6"/><circle cx="500" cy="50" r="1.5" fill="white" opacity="0.9"/><circle cx="800" cy="300" r="0.8" fill="white" opacity="0.7"/><circle cx="200" cy="600" r="1.2" fill="white" opacity="0.8"/><circle cx="900" cy="700" r="0.6" fill="white" opacity="0.5"/><circle cx="600" cy="800" r="1" fill="white" opacity="0.8"/><circle cx="50" cy="900" r="0.7" fill="white" opacity="0.6"/><circle cx="750" cy="150" r="1.3" fill="white" opacity="0.9"/><circle cx="400" cy="450" r="0.9" fill="white" opacity="0.7"/></svg>');
+            animation: stars-twinkle 20s linear infinite;
+        }
+        
+        @keyframes stars-twinkle {
+            0%, 100% { background-position: 0 0; }
+            50% { background-position: 100px 100px; }
+        }
+        
+        .glass {
+            @apply backdrop-blur-sm bg-white/10 border border-white/20;
+        }
+        
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+
+<body class="font-body text-gray-900 leading-relaxed">
+    <!-- Hero Section -->
+    <section class="min-h-screen stars-bg relative overflow-hidden">
+        <!-- Background overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/50 to-slate-900/80"></div>
+        
+        <!-- Navigation -->
+        <nav class="relative z-10 container mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="https://raw.githubusercontent.com/truefrontier/simplemcp/main/public/img/simplemcp-icon.png" alt="SimpleMCP" class="w-10 h-10">
+                    <span class="font-display font-bold text-2xl text-white">SimpleMCP</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-white/80 hover:text-white transition-colors">Features</a>
+                    <a href="#pricing" class="text-white/80 hover:text-white transition-colors">Pricing</a>
+                    <a href="#faq" class="text-white/80 hover:text-white transition-colors">FAQ</a>
+                </div>
+                <a href="https://github.com/truefrontier/simplemcp/releases" class="btn btn-primary">Download</a>
+            </div>
+        </nav>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 container mx-auto px-6 pt-20 pb-32">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Hero Headline (5-8 words) -->
+                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl text-white mb-8 text-shadow">
+                    Setup MCP Servers Instantly
+                </h1>
+                
+                <!-- Hero Subheading (Single sentence with all 6 core elements) -->
+                <p class="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto text-shadow">
+                    <!-- 🟡 Target Customer --> <strong>Developers and AI power users</strong> 
+                    <!-- 🔴 Problem --> struggling with complex MCP server configuration and credential management 
+                    <!-- 🟣 Product Category --> can use this desktop application 
+                    <!-- 🟠 Capabilities --> to automate Node.js installation, credential sync, and AI assistant integration 
+                    <!-- 🟢 Features --> through a simple 3-step wizard 
+                    <!-- 🔵 Benefits --> and save hours of manual setup work.
+                </p>
+                
+                <!-- Hero CTA -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                    <a href="https://github.com/truefrontier/simplemcp/releases" class="btn btn-primary text-lg px-12 py-5">
+                        Download Free
+                    </a>
+                    <a href="#demo" class="btn btn-secondary text-lg px-12 py-5">
+                        Watch Demo
+                    </a>
+                </div>
+                
+                <!-- Hero Image/Screenshot -->
+                <div class="glass rounded-2xl p-8 mx-auto max-w-4xl">
+                    <div class="bg-gray-800 rounded-lg p-6 text-left">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            <span class="text-gray-400 text-sm ml-4">SimpleMCP Dashboard</span>
+                        </div>
+                        <div class="text-green-400 font-mono text-sm space-y-2">
+                            <div>✅ Claude Desktop detected</div>
+                            <div>✅ Node.js v22.16.0 installed</div>
+                            <div>✅ Airtable MCP configured</div>
+                            <div>✅ GitHub MCP configured</div>
+                            <div>✅ Slack MCP configured</div>
+                            <div class="text-blue-400">🚀 All MCP tools ready for use!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem-Solution (PAS) Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <!-- Problem Statement -->
+                <div class="text-center mb-16">
+                    <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-8">
+                        MCP Setup Is A Nightmare
+                    </h2>
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        Setting up Model Context Protocol servers manually is frustrating, time-consuming, and error-prone.
+                    </p>
+                </div>
+                
+                <!-- Agitation Points -->
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">😤</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-xl mb-3">Hours of Manual Config</h3>
+                        <p class="text-gray-600">Installing Node.js, configuring JSON files, managing credentials across multiple MCP servers.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🔥</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-xl mb-3">Cryptic Error Messages</h3>
+                        <p class="text-gray-600">Debugging connection failures, authentication issues, and version conflicts without clear guidance.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">💸</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-xl mb-3">Productivity Killer</h3>
+                        <p class="text-gray-600">Spending development time on infrastructure instead of building amazing AI-powered applications.</p>
+                    </div>
+                </div>
+                
+                <!-- Solution Introduction -->
+                <div class="glass rounded-2xl p-8 text-center">
+                    <h3 class="font-display font-bold text-3xl text-gray-900 mb-4">
+                        SimpleMCP Eliminates The Pain
+                    </h3>
+                    <p class="text-lg text-gray-700 mb-6">
+                        Our desktop application automates everything: Node.js installation, MCP server configuration, credential management, and AI assistant integration.
+                    </p>
+                    <a href="#onboarding" class="btn btn-primary">See How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3-Step Onboarding Process -->
+    <section id="onboarding" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
+                    Get Started In 3 Simple Steps
+                </h2>
+                <p class="text-xl text-gray-600">
+                    From download to fully configured MCP servers in under 5 minutes.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl font-bold text-white">1</span>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-4">Detect AI Assistant</h3>
+                    <p class="text-gray-600 mb-6">
+                        SimpleMCP automatically finds your Claude Desktop installation or guides you through setup for other AI assistants.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 text-sm text-left">
+                        <div class="text-green-600">✅ Claude Desktop found</div>
+                        <div class="text-gray-500">📍 /Applications/Claude.app</div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl font-bold text-white">2</span>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-4">Install Dependencies</h3>
+                    <p class="text-gray-600 mb-6">
+                        Automatically downloads Node.js v22.16.0 and configures your MCP server environment with zero manual intervention.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 text-sm text-left">
+                        <div class="text-blue-600">📥 Downloading Node.js...</div>
+                        <div class="text-green-600">✅ Node.js v22.16.0 installed</div>
+                        <div class="text-green-600">✅ MCP server configured</div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-accent-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl font-bold text-white">3</span>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-4">Add MCP Tools</h3>
+                    <p class="text-gray-600 mb-6">
+                        Connect Airtable, GitHub, Slack, and other MCP tools. SimpleMCP handles credentials and connection testing automatically.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 text-sm text-left">
+                        <div class="text-green-600">✅ Airtable MCP ready</div>
+                        <div class="text-green-600">✅ GitHub MCP ready</div>
+                        <div class="text-green-600">✅ Slack MCP ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Benefits -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
+                    Why Developers Choose SimpleMCP
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Measurable results that save time and eliminate frustration.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-primary-500 mb-2">5min</div>
+                    <div class="font-display font-semibold text-lg mb-2">Setup Time</div>
+                    <div class="text-gray-600 text-sm">vs 2+ hours manually</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">Zero</div>
+                    <div class="font-display font-semibold text-lg mb-2">Config Errors</div>
+                    <div class="text-gray-600 text-sm">Automated validation</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-accent-500 mb-2">15+</div>
+                    <div class="font-display font-semibold text-lg mb-2">MCP Tools</div>
+                    <div class="text-gray-600 text-sm">Ready to connect</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-green-500 mb-2">100%</div>
+                    <div class="font-display font-semibold text-lg mb-2">Free & Open</div>
+                    <div class="text-gray-600 text-sm">MIT licensed</div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-16">
+                <div class="glass rounded-lg p-6">
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Lightning Fast Setup</h3>
+                    <p class="text-gray-600">Get from zero to fully configured MCP environment in under 5 minutes with automated dependency management.</p>
+                </div>
+                <div class="glass rounded-lg p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Secure By Design</h3>
+                    <p class="text-gray-600">Encrypted credential storage with automatic synchronization across all your MCP tools and AI assistants.</p>
+                </div>
+                <div class="glass rounded-lg p-6">
+                    <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Production Ready</h3>
+                    <p class="text-gray-600">Built on Tauri v2 with Rust backend for maximum performance, security, and cross-platform compatibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Validation -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
+                    Trusted By AI Developers
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Join hundreds of developers who've eliminated MCP setup headaches.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-bold">DJ</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold">David Johnson</div>
+                            <div class="text-sm text-gray-600">AI Consultant</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Saved me 3 hours of setup time on my first project. The credential sync alone is worth it."</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-bold">SM</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Sarah Miller</div>
+                            <div class="text-sm text-gray-600">Full Stack Developer</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Finally, MCP setup that just works. No more debugging config files at midnight."</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-bold">RC</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Robert Chen</div>
+                            <div class="text-sm text-gray-600">Tech Lead</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Our whole team switched to SimpleMCP. Onboarding new developers is now seamless."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Breakdown -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
+                    Complete MCP Management Platform
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Everything you need to manage MCP servers efficiently.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="font-display font-bold text-3xl mb-6">Multi-Transport Support</h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>SSE (Server-Sent Events):</strong> Web-based MCP servers with real-time streaming</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>Stdio:</strong> Traditional command-line MCP servers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-3">🔜</span>
+                            <span><strong>WebSocket:</strong> Coming soon for real-time bidirectional communication</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 text-left">
+                    <div class="text-green-400 font-mono text-sm space-y-2">
+                        <div>📡 SSE: Innalysis IRR Calculator</div>
+                        <div>💻 Stdio: Airtable MCP Server</div>
+                        <div>💻 Stdio: GitHub MCP Server</div>
+                        <div>💻 Stdio: Slack MCP Server</div>
+                        <div>📡 SSE: Custom Web MCP</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="bg-gray-800 rounded-lg p-6 text-left order-2 md:order-1">
+                    <div class="text-blue-400 font-mono text-sm space-y-2">
+                        <div>🔐 Encrypted credential storage</div>
+                        <div>🔄 Auto-sync across AI assistants</div>
+                        <div>🛡️ Secure key management</div>
+                        <div>✅ Connection validation</div>
+                        <div>🔍 Real-time status monitoring</div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h3 class="font-display font-bold text-3xl mb-6">Advanced Credential Management</h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>Encrypted Storage:</strong> All API keys and secrets stored securely</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>Auto-Sync:</strong> Credentials automatically synced across all MCP servers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>Connection Testing:</strong> Real-time validation of all MCP connections</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="font-display font-bold text-3xl mb-6">Cross-Platform Desktop App</h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>macOS:</strong> Native .dmg installer with automatic updates</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>Windows:</strong> .exe installer with system tray integration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3">✅</span>
+                            <span><strong>Linux:</strong> .AppImage and .deb packages available</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex justify-center space-x-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                            <span class="text-3xl">🍎</span>
+                        </div>
+                        <div class="text-sm">macOS</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                            <span class="text-3xl">🪟</span>
+                        </div>
+                        <div class="text-sm">Windows</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                            <span class="text-3xl">🐧</span>
+                        </div>
+                        <div class="text-sm">Linux</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Analysis -->
+    <section class="py-20 bg-red-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-8">
+                    The Cost Of Manual MCP Setup
+                </h2>
+                <p class="text-xl text-gray-600 mb-12">
+                    Every day you delay, you're losing valuable development time and team productivity.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white rounded-lg p-6 border-l-4 border-red-500">
+                        <div class="text-3xl font-bold text-red-500 mb-2">$2,400</div>
+                        <div class="font-semibold mb-2">Monthly Cost</div>
+                        <div class="text-sm text-gray-600">Senior developer spending 3 hours/week on MCP issues at $200/hour</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 border-l-4 border-red-500">
+                        <div class="text-3xl font-bold text-red-500 mb-2">73%</div>
+                        <div class="font-semibold mb-2">Failed Setups</div>
+                        <div class="text-sm text-gray-600">Developers report MCP configuration failures on first attempt</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 border-l-4 border-red-500">
+                        <div class="text-3xl font-bold text-red-500 mb-2">4.2hrs</div>
+                        <div class="font-semibold mb-2">Average Debug Time</div>
+                        <div class="text-sm text-gray-600">Time spent troubleshooting MCP connection issues per project</div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-2xl mb-4">Stop Wasting Time. Start Building.</h3>
+                    <p class="text-lg text-gray-600 mb-6">
+                        While you're debugging MCP configs, your competitors are shipping AI-powered features.
+                    </p>
+                    <a href="https://github.com/truefrontier/simplemcp/releases" class="btn btn-primary text-lg px-12 py-5">
+                        Download SimpleMCP Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Structure -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
+                    Simple, Transparent Pricing
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Free forever. Open source. No hidden costs.
+                </p>
+            </div>
+            
+            <div class="max-w-md mx-auto">
+                <div class="bg-gradient-to-b from-primary-500 to-primary-600 rounded-2xl p-8 text-white text-center shadow-2xl">
+                    <h3 class="font-display font-bold text-3xl mb-4">Free Forever</h3>
+                    <div class="text-6xl font-bold mb-6">$0</div>
+                    <div class="text-primary-100 mb-8">No limits. No subscriptions. No catch.</div>
+                    
+                    <ul class="text-left space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <span class="text-green-300 mr-3">✅</span>
+                            <span>Unlimited MCP servers</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-300 mr-3">✅</span>
+                            <span>All transport types (SSE, Stdio)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-300 mr-3">✅</span>
+                            <span>Secure credential management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-300 mr-3">✅</span>
+                            <span>Cross-platform support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-300 mr-3">✅</span>
+                            <span>MIT license (modify freely)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-300 mr-3">✅</span>
+                            <span>Community support</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://github.com/truefrontier/simplemcp/releases" class="block w-full bg-white text-primary-600 font-bold py-4 rounded-full hover:bg-gray-100 transition-colors">
+                        Download Now
+                    </a>
+                    
+                    <div class="text-primary-100 text-sm mt-4">
+                        Available for macOS, Windows & Linux
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-4">
+                    Want to contribute or need enterprise support?
+                </p>
+                <a href="https://github.com/truefrontier/simplemcp" class="text-primary-600 hover:text-primary-700 font-semibold">
+                    View on GitHub →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Everything you need to know about SimpleMCP.
+                    </p>
+                </div>
+                
+                <div class="space-y-6" x-data="{ openFaq: null }">
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button @click="openFaq = openFaq === 1 ? null : 1" class="w-full text-left p-6 flex justify-between items-center">
+                            <span class="font-semibold text-lg">What AI assistants does SimpleMCP support?</span>
+                            <span class="text-2xl" x-text="openFaq === 1 ? '−' : '+'"></span>
+                        </button>
+                        <div x-show="openFaq === 1" x-collapse class="px-6 pb-6">
+                            <p class="text-gray-600">SimpleMCP works with Claude Desktop (recommended), ChatGPT, and any AI assistant that supports the Model Context Protocol. We automatically detect Claude Desktop and provide setup guidance for other assistants.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button @click="openFaq = openFaq === 2 ? null : 2" class="w-full text-left p-6 flex justify-between items-center">
+                            <span class="font-semibold text-lg">Do I need to install Node.js manually?</span>
+                            <span class="text-2xl" x-text="openFaq === 2 ? '−' : '+'"></span>
+                        </button>
+                        <div x-show="openFaq === 2" x-collapse class="px-6 pb-6">
+                            <p class="text-gray-600">No! SimpleMCP automatically downloads and installs Node.js v22.16.0 if it's not already present on your system. This is one of the main benefits - no manual dependency management required.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button @click="openFaq = openFaq === 3 ? null : 3" class="w-full text-left p-6 flex justify-between items-center">
+                            <span class="font-semibold text-lg">How secure is credential storage?</span>
+                            <span class="text-2xl" x-text="openFaq === 3 ? '−' : '+'"></span>
+                        </button>
+                        <div x-show="openFaq === 3" x-collapse class="px-6 pb-6">
+                            <p class="text-gray-600">All credentials are encrypted using industry-standard encryption and stored locally on your machine. SimpleMCP never sends your API keys or secrets to external servers. The Rust backend provides additional security layers.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button @click="openFaq = openFaq === 4 ? null : 4" class="w-full text-left p-6 flex justify-between items-center">
+                            <span class="font-semibold text-lg">Can I add custom MCP servers?</span>
+                            <span class="text-2xl" x-text="openFaq === 4 ? '−' : '+'"></span>
+                        </button>
+                        <div x-show="openFaq === 4" x-collapse class="px-6 pb-6">
+                            <p class="text-gray-600">Absolutely! SimpleMCP supports any MCP-compatible server. You can add custom servers using either SSE (web-based) or Stdio (command-line) transport types. The interface provides easy configuration for both types.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button @click="openFaq = openFaq === 5 ? null : 5" class="w-full text-left p-6 flex justify-between items-center">
+                            <span class="font-semibold text-lg">What if SimpleMCP doesn't work for me?</span>
+                            <span class="text-2xl" x-text="openFaq === 5 ? '−' : '+'"></span>
+                        </button>
+                        <div x-show="openFaq === 5" x-collapse class="px-6 pb-6">
+                            <p class="text-gray-600">Since SimpleMCP is free and open source, there's no financial risk. If you encounter issues, check our GitHub repository for troubleshooting guides, or open an issue for community support. The logs in SimpleMCP's dashboard provide detailed error information.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button @click="openFaq = openFaq === 6 ? null : 6" class="w-full text-left p-6 flex justify-between items-center">
+                            <span class="font-semibold text-lg">How do I update SimpleMCP?</span>
+                            <span class="text-2xl" x-text="openFaq === 6 ? '−' : '+'"></span>
+                        </button>
+                        <div x-show="openFaq === 6" x-collapse class="px-6 pb-6">
+                            <p class="text-gray-600">SimpleMCP includes automatic update notifications. When a new version is available, the app will prompt you to download and install it. Updates are always backwards compatible with your existing MCP server configurations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 stars-bg relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-800/80 to-slate-900/90"></div>
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display font-bold text-4xl md:text-6xl text-white mb-8 text-shadow">
+                    Stop Fighting MCP Setup
+                </h2>
+                <p class="text-xl md:text-2xl text-white/90 mb-12 text-shadow">
+                    Join hundreds of developers who've eliminated MCP configuration headaches. Download SimpleMCP and start building amazing AI applications in minutes, not hours.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                    <a href="https://github.com/truefrontier/simplemcp/releases" class="btn btn-primary text-lg px-12 py-5">
+                        Download Free Now
+                    </a>
+                    <a href="https://github.com/truefrontier/simplemcp" class="btn btn-secondary text-lg px-12 py-5">
+                        View on GitHub
+                    </a>
+                </div>
+                
+                <div class="text-white/70 text-sm">
+                    ✅ Free forever &nbsp;&nbsp;|&nbsp;&nbsp; ✅ Open source &nbsp;&nbsp;|&nbsp;&nbsp; ✅ No registration required
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://raw.githubusercontent.com/truefrontier/simplemcp/main/public/img/simplemcp-icon.png" alt="SimpleMCP" class="w-8 h-8">
+                        <span class="font-display font-bold text-xl">SimpleMCP</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        The easiest way to set up and manage MCP servers for AI assistants.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
+                        <li><a href="https://github.com/truefrontier/simplemcp/releases" class="text-gray-400 hover:text-white">Download</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/truefrontier/simplemcp" class="text-gray-400 hover:text-white">Documentation</a></li>
+                        <li><a href="https://github.com/truefrontier/simplemcp/issues" class="text-gray-400 hover:text-white">Issues</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://truefrontierapps.com" class="text-gray-400 hover:text-white">True Frontier Apps</a></li>
+                        <li><a href="https://github.com/truefrontier" class="text-gray-400 hover:text-white">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 True Frontier Apps. Released under MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

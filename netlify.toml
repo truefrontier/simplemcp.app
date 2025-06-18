@@ -1,0 +1,26 @@
+[build]
+  publish = "."
+  command = "echo 'Static site, no build needed'"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+  from = "/download"
+  to = "https://github.com/truefrontier/simplemcp/releases"
+  status = 302
+
+[[redirects]]
+  from = "/github"
+  to = "https://github.com/truefrontier/simplemcp"
+  status = 302
+
+[[redirects]]
+  from = "/docs"
+  to = "https://github.com/truefrontier/simplemcp#readme"
+  status = 302
