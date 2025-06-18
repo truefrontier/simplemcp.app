@@ -7,122 +7,25 @@
     <meta name="description" content="Be the first to know when SimpleMCP launches. Join our waitlist to get early access to the easiest MCP server management tool.">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="app-icon.png">
-    <link rel="apple-touch-icon" href="app-icon.png">
+    <link rel="icon" type="image/svg+xml" href="menu-icon.svg">
+    <link rel="apple-touch-icon" href="menu-icon.svg">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#fefbea',
-                            100: '#fef3c7',
-                            200: '#fde68a',
-                            300: '#fcd34d',
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                            700: '#b45309',
-                            800: '#92400e',
-                            900: '#78350f',
-                        },
-                        blue: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        },
-                        accent: {
-                            50: '#faf5ff',
-                            100: '#f3e8ff',
-                            200: '#e9d5ff',
-                            300: '#d8b4fe',
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                            700: '#7c3aed',
-                            800: '#6b21a8',
-                            900: '#581c87',
-                        }
-                    },
-                    fontFamily: {
-                        'display': ['Montserrat', 'sans-serif'],
-                        'body': ['Nunito Sans', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <style>
-        .btn {
-            @apply outline-none focus-visible:ring-2 ring-primary-500 inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-b from-blue-600/50 to-blue-400/50 duration-300 bg-size-200 bg-pos-0 drop-shadow-xl hover:bg-pos-100 backdrop-blur-sm font-display uppercase font-bold text-lg tracking-wider no-underline select-none whitespace-nowrap transition-all cursor-pointer;
-        }
-        .btn-primary {
-            @apply bg-gradient-to-b from-primary-500 to-primary-600 text-white hover:from-primary-400 hover:to-primary-500;
-        }
-        
-        .stars-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="1" fill="white" opacity="0.8"/><circle cx="300" cy="200" r="0.5" fill="white" opacity="0.6"/><circle cx="500" cy="50" r="1.5" fill="white" opacity="0.9"/><circle cx="800" cy="300" r="0.8" fill="white" opacity="0.7"/><circle cx="200" cy="600" r="1.2" fill="white" opacity="0.8"/><circle cx="900" cy="700" r="0.6" fill="white" opacity="0.5"/><circle cx="600" cy="800" r="1" fill="white" opacity="0.8"/><circle cx="50" cy="900" r="0.7" fill="white" opacity="0.6"/><circle cx="750" cy="150" r="1.3" fill="white" opacity="0.9"/><circle cx="400" cy="450" r="0.9" fill="white" opacity="0.7"/></svg>');
-            animation: stars-twinkle 20s linear infinite;
-        }
-        
-        @keyframes stars-twinkle {
-            0%, 100% { background-position: 0 0; }
-            50% { background-position: 100px 100px; }
-        }
-        
-        .glass {
-            @apply backdrop-blur-sm bg-white/10 border border-white/20;
-        }
-        
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .form-input {
-            @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
-        }
-        
-        .form-textarea {
-            @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none;
-        }
-        
-        .form-select {
-            @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
-        }
-        
-        .form-select option {
-            @apply bg-gray-800 text-white;
-        }
-    </style>
+    <!-- Vite -->
+    <script type="module" src="/src/main.js"></script>
 </head>
 
 <body class="font-body text-gray-900 leading-relaxed">
-    <div class="min-h-screen stars-bg relative overflow-hidden">
-        <!-- Background overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/50 to-slate-900/80"></div>
+    <div class="relative z-10">
+    <div class="min-h-screen relative overflow-hidden">
         
         <!-- Navigation -->
-        <nav class="relative z-10 container mx-auto px-6 py-6">
+        <nav class="relative relative container mx-auto px-6 py-6">
             <div class="flex items-center justify-between">
                 <a href="/" class="flex items-center space-x-3">
                     <img src="menu-icon.svg" alt="SimpleMCP" class="w-10 h-10 brightness-0 invert">
@@ -137,7 +40,7 @@
         </nav>
         
         <!-- Waitlist Form -->
-        <div class="relative z-10 container mx-auto px-6 py-16">
+        <div class="relative relative container mx-auto px-6 py-16">
             <div class="max-w-2xl mx-auto">
                 <!-- Header -->
                 <div class="text-center mb-12">
@@ -274,10 +177,10 @@
             </div>
         </div>
     </div>
-    
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
+    </div>
+
+    <!-- Background layers -->
+    <div class="z-0 fixed inset-0 bg-gradient-to-b from-black/50 via-slate/70 to-slate/50"></div>
+    <div class="motion-safe:animate-stars z-0 fixed inset-0 opacity-80" style="background: url('/public/visuals/bg-stars.png') 0 0/1000px 1000px repeat"></div>
 </body>
 </html>

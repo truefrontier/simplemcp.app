@@ -1,0 +1,109 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --color-grayscale-1000: #0d1117;
+    --color-slate-1000: #020617;
+    --color-blue-1000: #172554;
+    --color-blue-900: #1e3a8a;
+    --color-blue-800: #1e40af;
+    --color-blue-700: #1d4ed8;
+    --color-blue-600: #2563eb;
+    --color-purple-500: #8b5cf6;
+    --color-purple-400: #a78bfa;
+    --color-gold-300: #fcd34d;
+    --color-gold-100: #fef3c7;
+  }
+
+  body {
+    @apply text-white flex flex-col min-h-screen bg-gray-900 selection:bg-white/80 selection:blur-sm selection:text-blue-700 leading-relaxed;
+    background: linear-gradient(
+        184deg, 
+        var(--color-grayscale-1000), 
+        var(--color-grayscale-1000), 
+        var(--color-slate-1000), 
+        var(--color-slate-1000), 
+        var(--color-blue-1000), 
+        var(--color-blue-900), 
+        var(--color-blue-800), 
+        var(--color-blue-700), 
+        var(--color-blue-600), 
+        var(--color-purple-500),
+        var(--color-purple-400),
+        var(--color-gold-300),
+        var(--color-gold-100)
+    );
+    scroll-behavior: smooth;
+  }
+
+  @keyframes moveStars {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-1000px, -1000px, 0);
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply outline-none focus-visible:ring-2 ring-primary-500 inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-b from-blue-600/50 to-blue-400/50 duration-300 drop-shadow-xl backdrop-blur-sm font-display uppercase font-bold text-lg tracking-wider no-underline select-none whitespace-nowrap transition-all cursor-pointer;
+    background-size: 200%;
+    background-position: 0%;
+  }
+  
+  .btn:hover {
+    background-position: 100%;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-b from-primary-500 to-primary-600 text-white hover:from-primary-400 hover:to-primary-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-400 hover:to-blue-500;
+  }
+  
+  .btn-accent {
+    @apply bg-gradient-to-b from-accent-500 to-accent-600 text-white hover:from-accent-400 hover:to-accent-500;
+  }
+  
+  .glass {
+    @apply backdrop-blur-sm bg-white/10 border border-white/20;
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+  }
+  
+  .form-textarea {
+    @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none;
+  }
+  
+  .form-select {
+    @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+  }
+  
+  .form-select option {
+    @apply bg-gray-800 text-white;
+  }
+}
+
+@layer utilities {
+  .animate-stars {
+    --bg-size-x: 2000px;
+    --bg-size-y: 2000px;
+    background-size: var(--bg-size-x) var(--bg-size-y);
+    background-position: calc(var(--bg-offset-x, 0px) + calc(var(--bg-size-x) * -1)) calc(var(--bg-offset-y, 0px) + var(--bg-size-y)) !important;
+    @apply -inset-[200%];
+    transform-origin: 50%;
+    animation: moveStars 1000s linear infinite;
+  }
+}

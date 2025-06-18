@@ -7,119 +7,30 @@
     <meta name="description" content="SimpleMCP helps developers and AI power users easily set up and manage MCP servers through a 3-step wizard that automates Node.js installation, credential management, and AI assistant integration, saving hours of manual configuration work.">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="app-icon.png">
-    <link rel="apple-touch-icon" href="app-icon.png">
+    <link rel="icon" type="image/svg+xml" href="menu-icon.svg">
+    <link rel="apple-touch-icon" href="menu-icon.svg">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#fefbea',
-                            100: '#fef3c7',
-                            200: '#fde68a',
-                            300: '#fcd34d',
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                            700: '#b45309',
-                            800: '#92400e',
-                            900: '#78350f',
-                        },
-                        blue: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        },
-                        accent: {
-                            50: '#faf5ff',
-                            100: '#f3e8ff',
-                            200: '#e9d5ff',
-                            300: '#d8b4fe',
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                            700: '#7c3aed',
-                            800: '#6b21a8',
-                            900: '#581c87',
-                        }
-                    },
-                    fontFamily: {
-                        'display': ['Montserrat', 'sans-serif'],
-                        'body': ['Nunito Sans', 'sans-serif'],
-                    },
-                    backgroundImage: {
-                        'stars': "url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\"><circle cx=\"100\" cy=\"100\" r=\"1\" fill=\"white\" opacity=\"0.8\"/><circle cx=\"300\" cy=\"200\" r=\"0.5\" fill=\"white\" opacity=\"0.6\"/><circle cx=\"500\" cy=\"50\" r=\"1.5\" fill=\"white\" opacity=\"0.9\"/><circle cx=\"800\" cy=\"300\" r=\"0.8\" fill=\"white\" opacity=\"0.7\"/><circle cx=\"200\" cy=\"600\" r=\"1.2\" fill=\"white\" opacity=\"0.8\"/><circle cx=\"900\" cy=\"700\" r=\"0.6\" fill=\"white\" opacity=\"0.5\"/><circle cx=\"600\" cy=\"800\" r=\"1\" fill=\"white\" opacity=\"0.8\"/><circle cx=\"50\" cy=\"900\" r=\"0.7\" fill=\"white\" opacity=\"0.6\"/><circle cx=\"750\" cy=\"150\" r=\"1.3\" fill=\"white\" opacity=\"0.9\"/><circle cx=\"400\" cy=\"450\" r=\"0.9\" fill=\"white\" opacity=\"0.7\"/></svg>')",
-                    }
-                }
-            }
-        }
-    </script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Alpine.js -->
+    <!-- Alpine.js with Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <style>
-        .btn {
-            @apply outline-none focus-visible:ring-2 ring-primary-500 inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-b from-blue-600/50 to-blue-400/50 duration-300 bg-size-200 bg-pos-0 drop-shadow-xl hover:bg-pos-100 backdrop-blur-sm font-display uppercase font-bold text-lg tracking-wider no-underline select-none whitespace-nowrap transition-all cursor-pointer;
-        }
-        .btn-primary {
-            @apply bg-gradient-to-b from-primary-500 to-primary-600 text-white hover:from-primary-400 hover:to-primary-500;
-        }
-        .btn-secondary {
-            @apply bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-400 hover:to-blue-500;
-        }
-        .btn-accent {
-            @apply bg-gradient-to-b from-accent-500 to-accent-600 text-white hover:from-accent-400 hover:to-accent-500;
-        }
-        
-        .stars-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="1" fill="white" opacity="0.8"/><circle cx="300" cy="200" r="0.5" fill="white" opacity="0.6"/><circle cx="500" cy="50" r="1.5" fill="white" opacity="0.9"/><circle cx="800" cy="300" r="0.8" fill="white" opacity="0.7"/><circle cx="200" cy="600" r="1.2" fill="white" opacity="0.8"/><circle cx="900" cy="700" r="0.6" fill="white" opacity="0.5"/><circle cx="600" cy="800" r="1" fill="white" opacity="0.8"/><circle cx="50" cy="900" r="0.7" fill="white" opacity="0.6"/><circle cx="750" cy="150" r="1.3" fill="white" opacity="0.9"/><circle cx="400" cy="450" r="0.9" fill="white" opacity="0.7"/></svg>');
-            animation: stars-twinkle 20s linear infinite;
-        }
-        
-        @keyframes stars-twinkle {
-            0%, 100% { background-position: 0 0; }
-            50% { background-position: 100px 100px; }
-        }
-        
-        .glass {
-            @apply backdrop-blur-sm bg-white/10 border border-white/20;
-        }
-        
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-    </style>
+    <!-- Vite -->
+    <script type="module" src="/src/main.js"></script>
 </head>
 
 <body class="font-body text-gray-900 leading-relaxed">
+    <div class="relative z-10">
     <!-- Hero Section -->
-    <section class="min-h-screen stars-bg relative overflow-hidden">
-        <!-- Background overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/50 to-slate-900/80"></div>
+    <section class="min-h-screen relative overflow-hidden">
         
         <!-- Navigation -->
-        <nav class="relative z-10 container mx-auto px-6 py-6">
+        <nav class="relative relative container mx-auto px-6 py-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <img src="menu-icon.svg" alt="SimpleMCP" class="w-10 h-10 brightness-0 invert">
@@ -135,7 +46,7 @@
         </nav>
         
         <!-- Hero Content -->
-        <div class="relative z-10 container mx-auto px-6 pt-20 pb-32">
+        <div class="relative relative container mx-auto px-6 pt-20 pb-32">
             <div class="max-w-4xl mx-auto text-center">
                 <!-- Hero Headline (5-8 words) -->
                 <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl text-white mb-8 text-shadow">
@@ -155,7 +66,7 @@
                 <!-- Hero CTA -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
                     <a href="waitlist.html" class="btn btn-primary text-lg px-12 py-5">
-                        Join Waitlist
+                        Download Free
                     </a>
                     <a href="#features" class="btn btn-secondary text-lg px-12 py-5">
                         Learn More
@@ -562,7 +473,7 @@
                         While you're debugging MCP configs, your competitors are shipping AI-powered features.
                     </p>
                     <a href="waitlist.html" class="btn btn-primary text-lg px-12 py-5">
-                        Join Waitlist Now
+                        Download Free
                     </a>
                 </div>
             </div>
@@ -615,7 +526,7 @@
                     </ul>
                     
                     <a href="waitlist.html" class="block w-full bg-white text-primary-600 font-bold py-4 rounded-full hover:bg-gray-100 transition-colors">
-                        Join Waitlist
+                        Download Free
                     </a>
                     
                     <div class="text-primary-100 text-sm mt-4">
@@ -654,7 +565,7 @@
                             <span class="font-semibold text-lg">What AI assistants does SimpleMCP support?</span>
                             <span class="text-2xl" x-text="openFaq === 1 ? '−' : '+'"></span>
                         </button>
-                        <div x-show="openFaq === 1" x-collapse class="px-6 pb-6">
+                        <div x-show="openFaq === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-100" x-transition:leave-end="opacity-0 transform scale-y-0" x-collapse class="px-6 pb-6 origin-top">
                             <p class="text-gray-600">SimpleMCP works with Claude Desktop (recommended), ChatGPT, and any AI assistant that supports the Model Context Protocol. We automatically detect Claude Desktop and provide setup guidance for other assistants.</p>
                         </div>
                     </div>
@@ -664,7 +575,7 @@
                             <span class="font-semibold text-lg">Do I need to install Node.js manually?</span>
                             <span class="text-2xl" x-text="openFaq === 2 ? '−' : '+'"></span>
                         </button>
-                        <div x-show="openFaq === 2" x-collapse class="px-6 pb-6">
+                        <div x-show="openFaq === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-100" x-transition:leave-end="opacity-0 transform scale-y-0" x-collapse class="px-6 pb-6 origin-top">
                             <p class="text-gray-600">No! SimpleMCP automatically downloads and installs Node.js v22.16.0 if it's not already present on your system. This is one of the main benefits - no manual dependency management required.</p>
                         </div>
                     </div>
@@ -674,7 +585,7 @@
                             <span class="font-semibold text-lg">How secure is credential storage?</span>
                             <span class="text-2xl" x-text="openFaq === 3 ? '−' : '+'"></span>
                         </button>
-                        <div x-show="openFaq === 3" x-collapse class="px-6 pb-6">
+                        <div x-show="openFaq === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-100" x-transition:leave-end="opacity-0 transform scale-y-0" x-collapse class="px-6 pb-6 origin-top">
                             <p class="text-gray-600">All credentials are encrypted using industry-standard encryption and stored locally on your machine. SimpleMCP never sends your API keys or secrets to external servers. The Rust backend provides additional security layers.</p>
                         </div>
                     </div>
@@ -684,7 +595,7 @@
                             <span class="font-semibold text-lg">Can I add custom MCP servers?</span>
                             <span class="text-2xl" x-text="openFaq === 4 ? '−' : '+'"></span>
                         </button>
-                        <div x-show="openFaq === 4" x-collapse class="px-6 pb-6">
+                        <div x-show="openFaq === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-100" x-transition:leave-end="opacity-0 transform scale-y-0" x-collapse class="px-6 pb-6 origin-top">
                             <p class="text-gray-600">Absolutely! SimpleMCP supports any MCP-compatible server. You can add custom servers using either SSE (web-based) or Stdio (command-line) transport types. The interface provides easy configuration for both types.</p>
                         </div>
                     </div>
@@ -694,7 +605,7 @@
                             <span class="font-semibold text-lg">What if SimpleMCP doesn't work for me?</span>
                             <span class="text-2xl" x-text="openFaq === 5 ? '−' : '+'"></span>
                         </button>
-                        <div x-show="openFaq === 5" x-collapse class="px-6 pb-6">
+                        <div x-show="openFaq === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-100" x-transition:leave-end="opacity-0 transform scale-y-0" x-collapse class="px-6 pb-6 origin-top">
                             <p class="text-gray-600">Since SimpleMCP is free and open source, there's no financial risk. If you encounter issues, check our GitHub repository for troubleshooting guides, or open an issue for community support. The logs in SimpleMCP's dashboard provide detailed error information.</p>
                         </div>
                     </div>
@@ -704,7 +615,7 @@
                             <span class="font-semibold text-lg">How do I update SimpleMCP?</span>
                             <span class="text-2xl" x-text="openFaq === 6 ? '−' : '+'"></span>
                         </button>
-                        <div x-show="openFaq === 6" x-collapse class="px-6 pb-6">
+                        <div x-show="openFaq === 6" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-y-0" x-transition:enter-end="opacity-100 transform scale-y-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-y-100" x-transition:leave-end="opacity-0 transform scale-y-0" x-collapse class="px-6 pb-6 origin-top">
                             <p class="text-gray-600">SimpleMCP includes automatic update notifications. When a new version is available, the app will prompt you to download and install it. Updates are always backwards compatible with your existing MCP server configurations.</p>
                         </div>
                     </div>
@@ -716,7 +627,7 @@
     <!-- Final CTA -->
     <section class="py-20 stars-bg relative">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-800/80 to-slate-900/90"></div>
-        <div class="relative z-10 container mx-auto px-6 text-center">
+        <div class="relative relative container mx-auto px-6 text-center">
             <div class="max-w-4xl mx-auto">
                 <h2 class="font-display font-bold text-4xl md:text-6xl text-white mb-8 text-shadow">
                     Stop Fighting MCP Setup
@@ -727,7 +638,7 @@
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
                     <a href="waitlist.html" class="btn btn-primary text-lg px-12 py-5">
-                        Get Early Access
+                        Download Free
                     </a>
                     <a href="https://github.com/truefrontier/simplemcp" class="btn btn-secondary text-lg px-12 py-5">
                         View on GitHub
@@ -742,12 +653,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="relative relative bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <img src="https://raw.githubusercontent.com/truefrontier/simplemcp/main/public/img/simplemcp-icon.png" alt="SimpleMCP" class="w-8 h-8">
+                        <img src="menu-icon.svg" alt="SimpleMCP" class="w-8 h-8 brightness-0 invert">
                         <span class="font-display font-bold text-xl">SimpleMCP</span>
                     </div>
                     <p class="text-gray-400 text-sm">
@@ -783,9 +694,10 @@
             </div>
         </div>
     </footer>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
+    </div>
+
+    <!-- Background layers -->
+    <div class="z-0 fixed inset-0 bg-gradient-to-b from-black/50 via-slate/70 to-slate/50"></div>
+    <div class="motion-safe:animate-stars z-0 fixed inset-0 opacity-80" style="background: url('/public/visuals/bg-stars.png') 0 0/1000px 1000px repeat"></div>
 </body>
 </html>
