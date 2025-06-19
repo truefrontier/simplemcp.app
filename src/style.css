@@ -94,6 +94,10 @@
   .form-select option {
     @apply bg-gray-800 text-white;
   }
+  
+  .btn-sm {
+    @apply px-5 py-2 text-base;
+  }
 }
 
 @layer utilities {
