@@ -24,3 +24,8 @@
   from = "/docs"
   to = "https://github.com/truefrontier/simplemcp#readme"
   status = 302
+
+[[redirects]]
+  from = "/thank-you"
+  to = "/thank-you.html"
+  status = 200
